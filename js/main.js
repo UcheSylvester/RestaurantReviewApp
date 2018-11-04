@@ -159,11 +159,12 @@ createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
 
   const image = document.createElement('img');
+  image.alt = 'image of restaurant ' + restaurant.name;
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -177,9 +178,11 @@ createRestaurantHTML = (restaurant) => {
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
+  more.setAttribute('aria-label', `View more details of the ${restaurant.name}`)
+  // more.aria-label='View more details of the ' + restaurant.name;
   more.href = DBHelper.urlForRestaurant(restaurant);
   // Making View Details links the immediate accessible element after filter options
-  more.tabindex = '3';
+  more.tabindex = '-1';
   li.append(more)
 
   return li
